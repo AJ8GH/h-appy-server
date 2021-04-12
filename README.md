@@ -1,7 +1,7 @@
 H-Appy
 ======
 
-## An app to remind you of fun things to do that make you happy, by HappyHaddock
+## An app to remind you of fun things to do that make you happy, by HappyHaddock
 
 ------
 
@@ -30,7 +30,7 @@ Interactions:
 - Accessibility score for each activity
 - Activities:
   - stored in our backend DB
-  - Wild card / catch of the day - From `bored API`
+  - Wild card / catch of the day - From [Bored API](https://www.boredapi.com/documentation#endpoints-key)
 
 Platform
 - Mobile
@@ -68,7 +68,7 @@ As a mild narcissist, so that I don’t accidentally reveal my personality flaws
 As a man of taste and culture, so that I can peruse only the finest of options, I want to rate other people’s menu items
 As a regular person, for my own mental wellbeing, I don’t want to see other people’s rating of my items unless I specifically look for them
 
-## Workflow:
+## Workflow:
 - 2 day sprints
 - Always work on branch, no pushing to master
 - All PR merges require review from 2 other team members
