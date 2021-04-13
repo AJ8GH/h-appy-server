@@ -1,0 +1,20 @@
+{
+  "name": "h-appy-haddock",
+  "version": "1.0.0",
+  "description": "H-Appy ======",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "expo": "cd h-appy && expo start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AJ8GH/h-appy-haddock.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AJ8GH/h-appy-haddock/issues"
+  },
+  "homepage": "https://github.com/AJ8GH/h-appy-haddock#readme"
+}
