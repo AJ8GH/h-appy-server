@@ -4,11 +4,18 @@ const mongoose = require('mongoose');
 const activityRouter = require('./routes/activityRoutes.js');
 
 const app = express();
+let dbName;
 
 app.use(express.json());
 
+if (process.env.NODE_ENV === 'test') {
+  dbName = 'test';
+} else {
+  dbName = 'development';
+}
+
 mongoose.connect(
-  `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@happyhaddock.e6r3s.mongodb.net/test?retryWrites=true&w=majority`,
+  `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@happyhaddock.e6r3s.mongodb.net/${dbName}?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useFindAndModify: false,

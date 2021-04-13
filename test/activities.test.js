@@ -20,12 +20,7 @@ describe('Activities', () => {
     });
   });
 
-  // afterEach(async () => {
-  //   require('../server').stop();
-  // });
-  /*
-   * Test the /GET route
-   */
+  // Test the /GET route
   describe('/GET activity', () => {
     it('it should GET all the activities', (done) => {
       chai

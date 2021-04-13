@@ -6,7 +6,7 @@ const url = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PAS
 const client = new MongoClient(url);
 
 // The database to use
-const dbName = 'test';
+const dbName = 'development';
 
 async function run() {
   try {
@@ -18,16 +18,27 @@ async function run() {
     const col = db.collection('activities');
 
     // Construct a document
-    let activityDocument = {
-      name: 'Go for a walk',
-      cost: 0.0,
-      accessibility: 0.8,
-      categories: ['outdoor', 'exercise'],
-      size: 0.3,
-    };
+    let activityArray = [
+      {
+        name: 'Go for a walk',
+        cost: 0.0,
+        accessibility: 0.8,
+        categories: ['outdoor', 'exercise'],
+        size: 0.3,
+      },
+      {
+        name: 'Go for a cycle',
+        cost: 0.0,
+        accessibility: 0.8,
+        categories: ['outdoor', 'exercise'],
+        size: 0.3,
+      },
+    ];
 
     // Insert a single document, wait for promise so we can read it back
-    const p = await col.insertOne(activityDocument);
+    activityArray.forEach(async (activityDocument) => {
+      const promise = await col.insertOne(activityDocument);
+    });
     // Find one document
     const myDoc = await col.findOne();
     // Print to the console
