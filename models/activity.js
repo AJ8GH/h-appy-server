@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const ActivitySchema = new mongoose.Schema({
   name: {
@@ -17,10 +17,10 @@ const ActivitySchema = new mongoose.Schema({
   },
   size: {
     type: String,
-  }
+  },
 });
 
-const Activity = mongoose.model("Activity", ActivitySchema);
+const Activity = mongoose.model('Activity', ActivitySchema);
 
 module.exports = Activity;
 

@@ -1,7 +1,7 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const activityRouter = require("./routes/activityRoutes.js");
+require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+const activityRouter = require('./routes/activityRoutes.js');
 
 const app = express();
 
@@ -19,5 +19,7 @@ mongoose.connect(
 app.use(activityRouter);
 
 app.listen(3000, () => {
-  console.log("Server is running...");
+  console.log('Server is running...');
 });
+
+module.exports = app;
