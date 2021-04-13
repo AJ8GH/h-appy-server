@@ -13,23 +13,23 @@ export default function App() {
         title="Fish"
         onPress={() => Alert.alert('here is a fish')}
       />
-      
-      <CollapsibleView title="Nibbles">
+
+      <CollapsibleView title="Nibbles" style={styles.menuCollapsible} noArrow={true}>
         <Text>little bits</Text>
-      
+
     </CollapsibleView>
-      <CollapsibleView title="Appetisers">
-        <Text>very tasty small things</Text>      
+      <CollapsibleView title="Appetisers" style={styles.menuCollapsible} noArrow={true}>
+        <Text>very tasty small things</Text>
     </CollapsibleView>
-    <CollapsibleView title="Main meals">
+    <CollapsibleView title="Main meals" style={styles.menuCollapsible} noArrow={true}>
 
         <Text>very tasty medium things</Text>
 
-      
+
     </CollapsibleView>
-    <CollapsibleView title="Desserts">
+    <CollapsibleView title="Desserts" style={styles.menuCollapsible} noArrow={true}>
         <Text>pudding</Text>
-      
+
     </CollapsibleView>
     <StatusBar />
     </View>
@@ -42,5 +42,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  menuCollapsible: {
+    width: 175
   },
 });
