@@ -2,7 +2,7 @@
 process.env.NODE_ENV = 'test';
 
 const mongoose = require('mongoose');
-const Activity = require('../models/activity');
+const Activity = require('../app/models/activity');
 
 //Require the dev-dependencies
 const chai = require('chai');
@@ -22,14 +22,28 @@ describe('Activities', () => {
 
   // Test the /GET route
   describe('/GET activity', () => {
-    it('it should GET all the activities', (done) => {
+    it('should GET all the activities', (done) => {
       chai
         .request(server)
         .get('/activities')
-        .end((err, res) => {
-          res.should.have.status(200);
-          res.body.should.be.a('array');
-          res.body.length.should.be.eql(0);
+        .end((err, response) => {
+          response.should.have.status(200);
+          response.body.should.be.a('array');
+          response.body.length.should.be.eql(0);
+          done();
+        });
+    });
+  });
+
+  describe('/POST activity', () => {
+    it('accepts a POST request', (done) => {
+      chai
+        .request(server)
+        .post('/activities')
+        .end((err, response) => {
+          response.should.have.status(200);
+          response.body.should.be.a('array');
+          response.body.length.should.be.eql(0);
           done();
         });
     });
