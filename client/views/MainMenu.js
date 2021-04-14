@@ -1,6 +1,7 @@
+
 import React, { useEffect, useState }  from 'react';
 import CollapsibleView from '@eliav2/react-native-collapsible-view';
-import { StyleSheet, Text, View, Button, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, FlatList, ActivityIndicator } from 'react-native';
 
 function buildItem(item) {
   return (
@@ -18,7 +19,8 @@ function BuildMenuSection(props) {
   const { subText } = props;
   const { sectionData } = props;
   return (
-    <CollapsibleView title={section} style={styles.menuCollapsible} noArrow>
+
+    <CollapsibleView title={<Text style={styles.menuSection}> {section}</Text>} style={styles.menuCollapsible} noArrow>
       <FlatList
         ListHeaderComponent={<Text style={styles.menuSubText}>{subText}</Text>}
         data={sectionData}
@@ -31,6 +33,7 @@ function BuildMenuSection(props) {
 }
 
 export default function Menu(props) {
+
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
@@ -42,12 +45,12 @@ export default function Menu(props) {
       .finally(() => setLoading(false));
   }, []);
 
-  // const DATA = props.data;
   return (
     <View>
       <BuildMenuSection
         section="Nibbles"
-        subText="Nibblelist (Nibbles)"
+
+        subText="Bitesized activities, for the short of time"
         sectionData={data.nibbles}
         navigation={props.navigation}
       />
@@ -84,9 +87,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   menuCollapsible: {
-    width: 175,
+    width: 250,
+    fontSize: 50,
+    borderRadius: 25,
+    borderColor: '#240037'
   },
   menuSubText: {
     textAlign: 'center',
+    fontSize: 20
   },
+  menuSection: {
+    fontSize: 30,
+    fontFamily: 'Didot'
+  }
+
 });

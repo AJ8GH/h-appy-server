@@ -1,18 +1,28 @@
 /* eslint-disable no-use-before-define */
 import { StatusBar } from 'expo-status-bar';
+
 import React, { useEffect, useState } from 'react';
 import CollapsibleView from '@eliav2/react-native-collapsible-view';
-import { StyleSheet, Text, View, Button, Alert, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, FlatList, Image, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Menu from './views/MainMenu';
+import Header from './components/header';
+
 
 const Stack = createStackNavigator();
 
 function Home({ navigation }) {
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Chez H-Appy</Text>
+      </View>
       <Menu data={DATA} navigation={navigation} />
+      <Image
+        style={styles.homeImage}
+        source={require('./forkknife.png')}
+      />
       <StatusBar />
     </View>
   );
@@ -21,6 +31,7 @@ function Home({ navigation }) {
 function Details({ navigation }) {
   return (
     <View style={styles.container}>
+      <Header />
       <Text>This is the Details page</Text>
       <Button
         title="Back to the Home Screen"
@@ -93,6 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#f8f9d4'
   },
   menuCollapsible: {
     width: 175,
@@ -100,4 +112,26 @@ const styles = StyleSheet.create({
   menuSubText: {
     textAlign: 'center',
   },
+  header: {
+    position: 'absolute',
+    top: 0,
+    backgroundColor: '#c7524a',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 60
+  },
+  title: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontFamily: 'Didot'
+  },
+  homeImage: {
+    position: "absolute",
+    bottom: 30,
+    width: 200,
+    height: 200
+  }
 });
