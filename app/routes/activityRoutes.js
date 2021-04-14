@@ -1,10 +1,6 @@
 const express = require('express');
 const activityModel = require('../models/activity');
 const app = express();
-const bodyParser = require('body-parser');
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
 app.get('/activities', async (request, response) => {
   const nibbles = await activityModel.find({ size: 'nibble' });
