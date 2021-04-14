@@ -18,7 +18,7 @@ function BuildMenuSection(props) {
   const { subText } = props;
   const { sectionData } = props;
   return (
-    <CollapsibleView title={section} style={styles.menuCollapsible} noArrow>
+    <CollapsibleView title={<Text style={styles.menuSection}> {section}</Text>} style={styles.menuCollapsible} noArrow>
       <FlatList
         ListHeaderComponent={<Text style={styles.menuSubText}>{subText}</Text>}
         data={sectionData}
@@ -71,12 +71,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+
   },
   menuCollapsible: {
     width: 250,
+    fontSize: 50,
+    borderRadius: 25,
+    borderColor: '#240037'
   },
   menuSubText: {
     textAlign: 'center',
     fontSize: 20
   },
+  menuSection: {
+    fontSize: 30,
+    fontFamily: 'Didot'
+
+  }
 });

@@ -2,11 +2,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import CollapsibleView from '@eliav2/react-native-collapsible-view';
-import { StyleSheet, Text, View, Button, Alert, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, FlatList, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Menu from './views/MainMenu';
 import Header from './components/header';
+
 
 const Stack = createStackNavigator();
 
@@ -14,9 +15,13 @@ function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>H-Appy</Text>
+        <Text style={styles.title}>Chez H-Appy</Text>
       </View>
       <Menu data={DATA} navigation={navigation} />
+      <Image
+        style={styles.homeImage}
+        source={require('./forkknife.png')}
+      />
       <StatusBar />
     </View>
   );
@@ -98,7 +103,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f6bd76'
+    backgroundColor: '#f8f9d4'
   },
   menuCollapsible: {
     width: 175,
@@ -109,16 +114,23 @@ const styles = StyleSheet.create({
   header: {
     position: 'absolute',
     top: 0,
-    backgroundColor: 'coral',
+    backgroundColor: '#c7524a',
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     height: 60
   },
   title: {
-    fontSize: 24,
+    fontSize: 25,
     fontWeight: 'bold',
     alignItems: 'center',
     justifyContent: 'center',
+    fontFamily: 'Didot'
+  },
+  homeImage: {
+    position: "absolute",
+    bottom: 30,
+    width: 200,
+    height: 200
   }
 });
