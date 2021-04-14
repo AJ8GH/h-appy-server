@@ -4,20 +4,48 @@ import React from "react";
 import CollapsibleView from "@eliav2/react-native-collapsible-view";
 import { StyleSheet, Text, View, Button, Alert, FlatList} from "react-native";
 import Menu from "./views/MainMenu"
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+function Home({ navigation }) {
   return (
-    <View style={styles.container}>
+      <View style={styles.container}>
       <Text>Hello Haddocks!</Text>
       <Button
         title="Fish"
         onPress={() => Alert.alert('here is a fish')}
       />
 
-      <Menu data={DATA}/>
+      <Menu data={DATA} navigation={navigation}/>
 
       <StatusBar />
+      
     </View>
+  );
+};
+
+function Details({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Text>This is the Details page</Text>
+      <Button
+        title="Back to the Home Screen"
+        onPress={() => navigation.navigate('Home')}
+      />
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Details" component={Details} />
+    </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
