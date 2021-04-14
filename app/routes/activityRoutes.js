@@ -1,9 +1,13 @@
 const express = require('express');
 const activityModel = require('../models/activity');
 const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get('/activities', async (request, response) => {
-  const activities = await activityModel.find({});
+  const activities = await activityModel.find(request.query);
   try {
     response.send(activities);
   } catch (error) {
