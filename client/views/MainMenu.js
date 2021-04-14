@@ -1,15 +1,22 @@
 
 import React, { useEffect, useState }  from 'react';
 import CollapsibleView from '@eliav2/react-native-collapsible-view';
-import { StyleSheet, Text, View, Button, Alert, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
 
 function buildItem(item) {
+  // return (
+  //   <View style={styles.item}>
+  //     <Text>{item.item.name}</Text>
+  //   </View>
+  // );
   return (
-    <View style={styles.item}>
-      <Button
-        title={item.item.name}
+    <View>
+      <TouchableOpacity
+        style={styles.item}
         onPress={() => navigation.navigate('Details')}
-      />
+      >
+        <Text>{item.item.name}</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -130,6 +137,12 @@ const styles = StyleSheet.create({
   menuSection: {
     fontSize: 30,
     fontFamily: 'Didot'
+  },
+  item: {
+    margin: 3,
+    padding: 6,
+    fontSize: 15,
+    backgroundColor: "#ffff99",
+    borderRadius: 20,
   }
-
 });
