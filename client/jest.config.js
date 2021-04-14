@@ -3,4 +3,4 @@ module.exports = {
   coverageDirectory: 'coverage',
   testEnvironment: 'node',
   preset: './node_modules/jest-expo/jest-preset.js',
-  }
+};

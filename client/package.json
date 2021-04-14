@@ -6,7 +6,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --coverage=true"
+    "test": "jest --coverage=true",
+    "lint": "eslint .",
+    "lint-fix": "eslint --fix ."
   },
   "jest": {
     "preset": "jest-expo",
