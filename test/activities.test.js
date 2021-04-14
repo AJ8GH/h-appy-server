@@ -28,8 +28,11 @@ describe('Activities', () => {
         .get('/activities')
         .end((err, response) => {
           response.should.have.status(200);
-          response.body.should.be.a('array');
-          response.body.length.should.be.eql(0);
+          response.body.should.be.a('object');
+          response.body.nibbles.length.should.be.eql(0);
+          response.body.appetisers.length.should.be.eql(0);
+          response.body.mains.length.should.be.eql(0);
+          response.body.desserts.length.should.be.eql(0);
           done();
         });
     });
