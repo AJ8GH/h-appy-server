@@ -24,15 +24,15 @@ async function run() {
         cost: 0.0,
         accessibility: 0.8,
         categories: ['outdoor', 'exercise'],
-        size: 0.3,
+        size: 'appetiser',
       },
       {
         name: 'Go for a cycle',
         cost: 0.0,
         accessibility: 0.8,
         categories: ['outdoor', 'exercise'],
-        size: 0.3,
-      },
+        size: 'main',
+      }
     ];
 
     // Insert a single document, wait for promise so we can read it back

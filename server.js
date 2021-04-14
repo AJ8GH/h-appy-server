@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const activityRouter = require('./routes/activityRoutes.js');
+const activityRouter = require('./app/routes/activityRoutes.js');
 
 const app = express();
 let dbName;
