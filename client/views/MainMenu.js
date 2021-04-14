@@ -14,16 +14,43 @@ function buildItem(item) {
   );
 }
 
+const badNetworkApiData = [
+  {
+    id: 'bd7dcbea-c1b1-46c2-aed5-3ad53abb28ba',
+    name: "The chef isn't available for requests right now",
+    ingredients: [],
+  },
+]
+
 function BuildMenuSection(props) {
   const { section } = props;
   const { subText } = props;
-  const { sectionData } = props;
+  let { apiData } = props;
+  const { userData } = props;
+
+  apiData = apiData || badNetworkApiData;
+  console.log('apiData'); console.log(apiData);
+  console.log('userData'); console.log(userData);
   return (
 
     <CollapsibleView title={<Text style={styles.menuSection}> {section}</Text>} style={styles.menuCollapsible} noArrow>
       <FlatList
         ListHeaderComponent={<Text style={styles.menuSubText}>{subText}</Text>}
-        data={sectionData}
+        data={userData}
+        renderItem={buildItem}
+        keyExtractor={(item) => item.id}
+        navigation={props.navigation}
+      />
+      <View
+        style={{
+          height: 5,
+          borderBottomColor: 'black',
+          borderBottomWidth: 1,
+        }}
+      />
+      <FlatList
+        ListHeaderComponent={<Text style={styles.menuSubText}>Chefs Specials</Text>}
+        data={apiData}
         renderItem={buildItem}
         keyExtractor={(item) => item.id}
         navigation={props.navigation}
@@ -33,14 +60,14 @@ function BuildMenuSection(props) {
 }
 
 export default function Menu(props) {
-
+  const { userData } = props;
   const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [apiData, setData] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:3000/activities')
       .then((response) => response.json())
-      .then((json) => setData(json))
+      .then((json) => setapiData(json))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, []);
@@ -51,28 +78,32 @@ export default function Menu(props) {
         section="Nibbles"
 
         subText="Bitesized activities, for the short of time"
-        sectionData={data.nibbles}
+        apiData={apiData.nibbles}
+        userData={userData.nibbles}
         navigation={props.navigation}
       />
 
       <BuildMenuSection
         section="Appetisers"
         subText="very tasty small things"
-        sectionData={data.appetisers}
+        apiData={apiData.appetisers}
+        userData={userData.appetisers}
         navigation={props.navigation}
       />
 
       <BuildMenuSection
         section="Mains"
         subText="very tasty medium things"
-        sectionData={data.mains}
+        apiData={apiData.mains}
+        userData={userData.mains}
         navigation={props.navigation}
       />
 
       <BuildMenuSection
         section="Desserts"
         subText="pudding"
-        sectionData={data.desserts}
+        apiData={apiData.desserts}
+        userData={userData.desserts}
         navigation={props.navigation}
       />
     </View>
