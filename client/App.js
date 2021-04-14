@@ -1,8 +1,9 @@
 /* eslint-disable no-use-before-define */
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
 import CollapsibleView from '@eliav2/react-native-collapsible-view';
-import { StyleSheet, Text, View, Button, Alert, FlatList, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, FlatList, Image, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Menu from './views/MainMenu';
