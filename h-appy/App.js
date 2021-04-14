@@ -3,28 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import CollapsibleView from "@eliav2/react-native-collapsible-view";
 import { StyleSheet, Text, View, Button, Alert, FlatList} from "react-native";
-
-function buildItem ( item ){
-  return (
-  <View style={styles.item}>
-    <Text>{item.item.title}</Text>
-  </View>)
-};
-
-function BuildMenuSection(props){
-  const section = props.section;
-  const subText = props.subText;
-  console.log(DATA[section]);
-  return (<CollapsibleView title={section} style={styles.menuCollapsible} noArrow={true}>
-      <FlatList
-        ListHeaderComponent={<Text style={styles.menuSubText}>{subText}</Text>}
-        data={DATA[section]}
-        renderItem = {buildItem}
-        keyExtractor={item => item.id}
-      />
-    </CollapsibleView>
-  );
-}
+import Menu from "./views/MainMenu"
 
 export default function App() {
   return (
@@ -35,18 +14,11 @@ export default function App() {
         onPress={() => Alert.alert('here is a fish')}
       />
 
-      <BuildMenuSection section="Nibbles" subText="Nibblelist (Nibbles)" />
-
-      <BuildMenuSection section="Appetisers" subText="very tasty small things" />
-
-      <BuildMenuSection section="Mains" subText="very tasty medium things" />
-
-      <BuildMenuSection section="Desserts" subText="pudding" />
+      <Menu data={DATA}/>
 
       <StatusBar />
     </View>
   );
-
 }
 
 
