@@ -11,3 +11,5 @@ h-appy/web-build/
 
 # macOS
 h-appy/.DS_Store
+.env
+node_modules
