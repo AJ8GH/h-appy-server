@@ -44,7 +44,7 @@ function BuildMenuSection(props) {
   console.log('userData'); console.log(userData);
   return (
 
-    <CollapsibleView title={<Text style={styles.menuSection}> {section}</Text>} style={styles.menuCollapsible} noArrow>
+    <CollapsibleView title={<Text style={styles.menuSection}>{section}</Text>} style={styles.menuCollapsible} noArrow>
       <FlatList
         ListHeaderComponent={<Text style={styles.menuSubText}>{subText}</Text>}
         data={userData}
@@ -73,12 +73,12 @@ function BuildMenuSection(props) {
 function Menu(props) {
   const { userData } = props;
   const [isLoading, setLoading] = useState(true);
-  const [apiData, setData] = useState([]);
+  const [apiData, setApiData] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:3000/activities')
       .then((response) => response.json())
-      .then((json) => setapiData(json))
+      .then((json) => setApiData(json))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, []);
@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Didot'
   },
   homeImage: {
-    position: "absolute",
     bottom: 30,
     width: 200,
     height: 200
