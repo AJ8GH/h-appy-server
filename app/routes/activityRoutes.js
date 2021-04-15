@@ -8,11 +8,11 @@ app.get('/activities', async (request, response) => {
   const mains = await activityModel.find({ size: 'main' });
   const desserts = await activityModel.find({ size: 'dessert' });
   const activities = {
-    'nibbles': nibbles,
-    'appetisers': appetisers,
-    'mains': mains,
-    'desserts': desserts
-  }
+    nibbles: nibbles,
+    appetisers: appetisers,
+    mains: mains,
+    desserts: desserts,
+  };
 
   try {
     response.send(activities);
@@ -22,9 +22,12 @@ app.get('/activities', async (request, response) => {
 });
 
 app.post('/activities', async (request, response) => {
-  const activities = await activityModel.find(request.body);
+  console.log(request.body);
+  const activity = new activityModel(request.body);
+
   try {
-    response.send(activities);
+    await activity.save();
+    response.status(201).send(activity);
   } catch (error) {
     response.status(500).send(error);
   }
