@@ -1,14 +1,34 @@
-
+import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState }  from 'react';
 import CollapsibleView from '@eliav2/react-native-collapsible-view';
-import { StyleSheet, Text, View, Button, Alert, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, Alert, FlatList, ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
+export default function MainMenu() {
+  const navigation = useNavigation();
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Chez H-Appy</Text>
+      </View>
+      <Button
+        title="About this App"
+        onPress={() => navigation.navigate('About')}
+      />
+      <Menu />
+      <Image
+        style={styles.homeImage}
+        source={require('../forkknife.png')}
+      />
+      <StatusBar />
+    </View>
+  );
+}
 function buildItem(item) {
   return (
     <View style={styles.item}>
       <Button
         title={item.item.name}
-        onPress={() => navigation.navigate('Details')}
       />
     </View>
   );
@@ -32,7 +52,7 @@ function BuildMenuSection(props) {
   );
 }
 
-export default function Menu(props) {
+function Menu(props) {
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -85,6 +105,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#f8f9d4'
   },
   menuCollapsible: {
     width: 250,
@@ -99,6 +120,27 @@ const styles = StyleSheet.create({
   menuSection: {
     fontSize: 30,
     fontFamily: 'Didot'
+  },
+  header: {
+    position: 'absolute',
+    top: 0,
+    backgroundColor: '#c7524a',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 60
+  },
+  title: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontFamily: 'Didot'
+  },
+  homeImage: {
+    position: "absolute",
+    bottom: 30,
+    width: 200,
+    height: 200
   }
-
 });
