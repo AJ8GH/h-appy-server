@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, Text, View, Button, Alert, FlatList, ActivityIndicator } from 'react-native';
 import Header from '../components/header';
 
-export default function Appetisers() {
+export default function IndividualActivity() {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
