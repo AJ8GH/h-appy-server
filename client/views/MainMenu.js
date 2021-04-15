@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState }  from 'react';
 import CollapsibleView from '@eliav2/react-native-collapsible-view';
-import { StyleSheet, Text, View, Button, Image, Alert, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 export default function MainMenu() {
@@ -11,12 +11,13 @@ export default function MainMenu() {
       <View style={styles.header}>
         <Text style={styles.title}>Chez H-Appy</Text>
       </View>
-      <Button
-        title="About this App"
+      <TouchableOpacity
         onPress={() => navigation.navigate('About')}
-      />
-      <Menu />
-      <Image
+      >
+        <Text>About this App</Text>
+      </TouchableOpacity>
+      <Menu userData={userData} />
+        <Image
         style={styles.homeImage}
         source={require('../forkknife.png')}
       />
@@ -27,9 +28,7 @@ export default function MainMenu() {
 function buildItem(item) {
   return (
     <View style={styles.item}>
-      <Button
-        title={item.item.name}
-      />
+      <Text>{item.item.name}</Text>
     </View>
   );
 }
@@ -37,13 +36,32 @@ function buildItem(item) {
 function BuildMenuSection(props) {
   const { section } = props;
   const { subText } = props;
-  const { sectionData } = props;
+  let { apiData } = props;
+  const { userData } = props;
+
+  apiData = apiData || badNetworkApiData;
+  console.log('apiData'); console.log(apiData);
+  console.log('userData'); console.log(userData);
   return (
 
     <CollapsibleView title={<Text style={styles.menuSection}> {section}</Text>} style={styles.menuCollapsible} noArrow>
       <FlatList
         ListHeaderComponent={<Text style={styles.menuSubText}>{subText}</Text>}
-        data={sectionData}
+        data={userData}
+        renderItem={buildItem}
+        keyExtractor={(item) => item.id}
+        navigation={props.navigation}
+      />
+      <View
+        style={{
+          height: 5,
+          borderBottomColor: 'black',
+          borderBottomWidth: 1,
+        }}
+      />
+      <FlatList
+        ListHeaderComponent={<Text style={styles.menuSubText}>Chefs Specials</Text>}
+        data={apiData}
         renderItem={buildItem}
         keyExtractor={(item) => item.id}
         navigation={props.navigation}
@@ -53,14 +71,14 @@ function BuildMenuSection(props) {
 }
 
 function Menu(props) {
-
+  const { userData } = props;
   const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [apiData, setData] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:3000/activities')
       .then((response) => response.json())
-      .then((json) => setData(json))
+      .then((json) => setapiData(json))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, []);
@@ -71,29 +89,29 @@ function Menu(props) {
         section="Nibbles"
 
         subText="Bitesized activities, for the short of time"
-        sectionData={data.nibbles}
-        navigation={props.navigation}
+        apiData={apiData.nibbles}
+        userData={userData.nibbles}
       />
 
       <BuildMenuSection
         section="Appetisers"
         subText="very tasty small things"
-        sectionData={data.appetisers}
-        navigation={props.navigation}
+        apiData={apiData.appetisers}
+        userData={userData.appetisers}
       />
 
       <BuildMenuSection
         section="Mains"
         subText="very tasty medium things"
-        sectionData={data.mains}
-        navigation={props.navigation}
+        apiData={apiData.mains}
+        userData={userData.mains}
       />
 
       <BuildMenuSection
         section="Desserts"
         subText="pudding"
-        sectionData={data.desserts}
-        navigation={props.navigation}
+        apiData={apiData.desserts}
+        userData={userData.desserts}
       />
     </View>
   );
@@ -137,10 +155,78 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     fontFamily: 'Didot'
   },
+  name: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontFamily: 'Didot'
+  },
   homeImage: {
     position: "absolute",
     bottom: 30,
     width: 200,
     height: 200
+  },
+  item: {
+    margin: 3,
+    padding: 6,
+    fontSize: 15,
+    backgroundColor: "#ffff99",
+    borderRadius: 20,
   }
 });
+
+const userData = {
+  nibbles: [
+    {
+      id: 'bd7dcbea-c1b1-46c2-aed5-3ad53abb28ba',
+      name: 'Go to the Cinema',
+      ingredients: [],
+    },
+    {
+      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+      name: 'Do a Puzzle',
+      ingredients: ['a phone or computer or puzzle book'],
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      name: 'Take a long awaited break',
+      ingredients: [],
+    },
+  ],
+  appetisers: [
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53dbb28ba',
+      name: 'Do a codewars kata',
+      ingredients: ['computer'],
+    },
+    {
+      id: 'bd0acjea-c4b1-46c2-red5-3ad53abb28ba',
+      name: 'Play a piece of music',
+      ingredients: ['an instrument', 'somewhere private'],
+    },
+  ],
+  mains: [
+    {
+      id: 'ai589cm1-oi5n-alf3-bd96-145571e29d72',
+      name: 'Learn a new song on the guitar',
+      ingredients: ['a guitar'],
+    },
+  ],
+  desserts: [
+    {
+      id: '3ac68afc-dk30-3kf9-a4f8-fbd91aa9d07k',
+      name: 'Browse Reddit for 3 hours',
+      ingredients: ['a phone', 'Ennui'],
+    },
+  ]
+}
+
+const badNetworkApiData = [
+  {
+    id: 'bd7dcbea-c1b1-46c2-aed5-3ad53abb28ba',
+    name: "The chef isn't available for requests right now",
+    ingredients: [],
+  },
+]
