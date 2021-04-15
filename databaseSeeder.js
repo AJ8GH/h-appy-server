@@ -18,8 +18,8 @@ function getSeeds() {
       items = row.split(',');
       DATA.push({
         name: items[0],
-        cost: items[1],
-        accessibility: items[2],
+        cost: parseInt(items[1]),
+        accessibility: parseInt(items[2]),
         size: items[3],
         categories: items.slice(4),
       });
