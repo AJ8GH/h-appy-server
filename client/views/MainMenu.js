@@ -38,6 +38,7 @@ function BuildMenuSection(props) {
   const { subText } = props;
   let { apiData } = props;
   const { userData } = props;
+  const navigation = useNavigation();
 
   apiData = apiData || badNetworkApiData;
   console.log('apiData'); console.log(apiData);
@@ -45,12 +46,11 @@ function BuildMenuSection(props) {
   return (
 
     <CollapsibleView title={<Text style={styles.menuSection}>{section}</Text>} style={styles.menuCollapsible} noArrow>
-      <FlatList
+      <FlatList 
         ListHeaderComponent={<Text style={styles.menuSubText}>{subText}</Text>}
         data={userData}
         renderItem={buildItem}
         keyExtractor={(item) => item.id}
-        navigation={props.navigation}
       />
       <View
         style={{
