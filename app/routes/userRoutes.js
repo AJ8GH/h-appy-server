@@ -16,20 +16,34 @@ userApp.post('/user', async (request, response) => {
 
 userApp.post('/user/login', async (request, response) => {
   try {
-    const { email, password } = request.body
-    const user = await userModel.findByCredentials(email, password)
+    const { email, password } = request.body;
+    const user = await userModel.findByCredentials(email, password);
     if (!user) {
-      return response.status(401).send({error: 'Login failed! Check authentication credentials'})
+      return response
+        .status(401)
+        .send({ error: 'Login failed! Check authentication credentials' });
     }
-    const token = await user.generateAuthToken()
-    response.send({ user, token })
+    const token = await user.generateAuthToken();
+    response.send({ user, token });
   } catch (error) {
-    response.status(400).send(error)
+    response.status(400).send(error);
   }
 });
 
-userApp.get('/user/profile', auth, async(request, response) => {
-  response.send(request.user)
-})
+userApp.get('/user/profile', auth, async (request, response) => {
+  response.send(request.user);
+});
+
+userApp.post('/user/profile/logout', auth, async (request, response) => {
+  try {
+    request.user.tokens = request.user.tokens.filter((token) => {
+      return token.token != request.token;
+    });
+    await request.user.save();
+    response.send();
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
 
 module.exports = userApp;
