@@ -1,15 +1,3 @@
-h-appy/node_modules/**/*
-h-appy/.expo/*
-h-appy/npm-debug.*
-h-appy/*.jks
-h-appy/*.p8
-h-appy/*.p12
-h-appy/*.key
-h-appy/*.mobileprovision
-h-appy/*.orig.*
-h-appy/web-build/
-
-# macOS
-h-appy/.DS_Store
+.DS_Store
 .env
 node_modules
