@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const activityRouter = require('./app/routes/activityRoutes.js');
+const userRouter = require('./app/routes/userRoutes.js');
 
 const app = express();
 let dbName;
@@ -24,6 +25,7 @@ mongoose.connect(
 );
 
 app.use(activityRouter);
+app.use(userRouter);
 
 app.listen(3000, () => {
   console.log('Server is running...');

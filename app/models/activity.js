@@ -23,9 +23,3 @@ const ActivitySchema = new mongoose.Schema({
 const Activity = mongoose.model('Activity', ActivitySchema);
 
 module.exports = Activity;
-
-// name
-// cost
-// accessibility
-// categories
-// size
