@@ -1,0 +1,35 @@
+name (string)	cost (between 0-10)	accessibility (between 0-10)	size (nibble appetiser main or dessert)	categories (strings as many as you want)	
+Go for a short walk in your local area	0	7	appetiser	outdoor	exercise
+Cook a meal from a new recipe	2	5	appetiser	food	indoor
+Go indoor climbing	3	1	main	exercise	indoor
+Play with your pet for 30 minutes	0	8	nibble	pets	
+Date night with the other half	5	8	main	couples	
+Meet some friends at the pub	5	8	main	alcohol	social
+See a movie tonight at the cinema	3	6	main	indoor	
+Buy tickets to a show at the theatre	7	6	main	indoor	culture
+See a tourist attraction in your city that you've never been to before	4	8	main	culture	
+Bake a really indulgent cake	2	5	dessert	food	
+Meet a friend for a coffee	1	8	appetiser	social	
+Go for beers with the boys	5	10	main	alcohol	social
+Meal at your favourite restaurant	5	8	main	food	
+Try a cuisine you've never tried before	5	9	appetiser	food	
+Order an indulgent takeaway	4	10	dessert	food	indoor
+Duvet day with chocolate and Netflix	1	10	dessert	food	indoor
+Meet up with a friend who you haven't seen in too long	0	10	main	social	
+Fix that thing in the house which needs fixing	2	5	main	diy	indoor
+Sign up for a 5k run with a friend	2	1	main	exercise	outdoor
+Meditate for 10 minutes today	0	10	nibble	self-care	indoor
+Commit to learning a new language	1	7	main	learning	indoor
+Buy the ingredients for your favourite cocktail	4	8	dessert	alcohol	
+Take the train to a beauty spot for a walk and a pub lunch	7	3	main	exercise	outdoor
+Buy some seeds and feed the ducks in your local park	1	8	appetiser	self-care	outdoor
+Revive an old hobby you haven't indulged in a while	0	10	appetiser	fun	
+Have a board games evening with your family	0	10	appetiser	fun	indoor
+Buy something you want, you deserve it	7	10	dessert	fun	indoor
+Go swimming	3	5	main	exercise	
+Text someone you care about	0	10	nibble	social	indoor
+Listen to a song that makes you happy	0	8	nibble	self-care	indoor
+Do some gardening 	3	4	appetiser	diy	outdoor
+Go to a your favourite museum in your hometown	4	8	main	learning	
+Head to a food market and try new things	5	7	main	food	outdoor
+Visit the sea, throw some stones, walk along the beach	4	3	main	fun	
