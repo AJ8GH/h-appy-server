@@ -1,8 +1,10 @@
 # H-Appy
 
-## An app to remind you of fun things to do that make you happy, by HappyHaddock
+See the project readme at [https://github.com/peter-james-allen/h-appy-client](https://github.com/peter-james-allen/h-appy-client).
 
----
+
+
+
 
 ## Planning
 
