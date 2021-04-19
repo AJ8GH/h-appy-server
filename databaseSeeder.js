@@ -1,13 +1,12 @@
 require('dotenv').config();
 const fs = require('fs');
-const { MongoClient } = require('mongodb');
+const activityModel = require('./app/models/activity');
+const mongoose = require('mongoose');
+const mongoDB = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@happyhaddock.e6r3s.mongodb.net/development?retryWrites=true&w=majority`;
 
-// Replace the following with your Atlas connection string
-const url = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@happyhaddock.e6r3s.mongodb.net/development?retryWrites=true&w=majority`;
-const client = new MongoClient(url);
-
-// The database to use
-const dbName = 'development';
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 function getSeeds() {
   let DATA = [];
@@ -18,10 +17,11 @@ function getSeeds() {
       items = row.split('\t');
       DATA.push({
         name: items[0].replace('"', '').trim(),
-        cost: parseInt(items[1]),
-        accessibility: parseInt(items[2]),
-        size: items[3],
-        categories: items.slice(4).filter(function (e) {
+        description: items[1].replace('"', '').trim(),
+        cost: parseInt(items[2]),
+        accessibility: parseInt(items[3]),
+        size: items[4],
+        categories: items.slice(5).filter(function (e) {
           return e !== '';
         }),
       });
@@ -29,27 +29,18 @@ function getSeeds() {
   return DATA;
 }
 
-async function run() {
-  try {
-    await client.connect();
-    console.log('Connected correctly to server');
-    const db = client.db(dbName);
+function run() {
+  let activityArray = getSeeds();
 
-    // Use the collection "people"
-    const col = db.collection('activities');
-
-    // Construct a document
-    let activityArray = getSeeds();
-
-    // Insert a single document, wait for promise so we can read it back
-    activityArray.forEach(async (activityDocument) => {
-      const promise = await col.insertOne(activityDocument);
+  activityArray.forEach((activityDocument) => {
+    let activityInstance = new activityModel(activityDocument);
+    activityInstance.save(function (err) {
+      if (err) {
+        // console.log(err);
+        return;
+      }
     });
-  } catch (err) {
-    console.log(err.stack);
-  } finally {
-    await client.close();
-  }
+  });
 }
 
-run().catch(console.dir);
+run();

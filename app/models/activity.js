@@ -7,6 +7,9 @@ const ActivitySchema = new mongoose.Schema({
     unique: true,
     trim: true,
   },
+  description: {
+    type: String,
+  },
   cost: {
     type: Number,
   },
