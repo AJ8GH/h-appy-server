@@ -33,4 +33,16 @@ app.post('/activities', async (request, response) => {
   }
 });
 
+app.get('/categories', async (request, response) => {
+  const categories = await activityModel.find({}).select('categories -_id');
+  let unique = [];
+  categories.map((i) => unique.push(i.categories));
+  unique = [...new Set(unique.flat())].sort();
+  try {
+    response.send(unique);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
+
 module.exports = app;
