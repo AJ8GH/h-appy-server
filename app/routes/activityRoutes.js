@@ -45,4 +45,20 @@ app.get('/categories', async (request, response) => {
   }
 });
 
+app.get('/search', async (request, response) => {
+  if (request.query.cost) {
+    request.query.cost = { $lte: request.query.cost };
+  }
+  if (request.query.accessibility) {
+    request.query.accessibility = { $lte: request.query.accessibility };
+  }
+
+  const results = await activityModel.find(request.query);
+  try {
+    response.send(results);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
+
 module.exports = app;
