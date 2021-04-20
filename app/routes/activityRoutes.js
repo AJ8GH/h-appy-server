@@ -3,10 +3,22 @@ const activityModel = require('../models/activity');
 const app = express();
 
 app.get('/activities', async (request, response) => {
-  const nibbles = await activityModel.find({ size: 'nibble' });
-  const appetisers = await activityModel.find({ size: 'appetiser' });
-  const mains = await activityModel.find({ size: 'main' });
-  const desserts = await activityModel.find({ size: 'dessert' });
+  let sampleNumber = 999;
+  if (request.query.limit) {
+    sampleNumber = parseInt(request.query.limit);
+  }
+  const nibbles = await activityModel
+    .aggregate([{ $match: { size: 'nibble' } }])
+    .sample(sampleNumber);
+  const appetisers = await activityModel
+    .aggregate([{ $match: { size: 'nibble' } }])
+    .sample(sampleNumber);
+  const mains = await activityModel
+    .aggregate([{ $match: { size: 'appetiser' } }])
+    .sample(sampleNumber);
+  const desserts = await activityModel
+    .aggregate([{ $match: { size: 'dessert' } }])
+    .sample(sampleNumber);
   const activities = {
     nibbles: nibbles,
     appetisers: appetisers,
@@ -50,7 +62,7 @@ app.get('/search', async (request, response) => {
     request.query.cost = { $lte: request.query.cost };
   }
   if (request.query.accessibility) {
-    request.query.accessibility = { $lte: request.query.accessibility };
+    request.query.accessibility = { $gte: request.query.accessibility };
   }
 
   const results = await activityModel.find(request.query);
