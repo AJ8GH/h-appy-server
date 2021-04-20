@@ -39,14 +39,27 @@ describe('Activities', () => {
   });
 
   describe('/POST activity', () => {
+    const activity = {
+      name: 'test',
+      cost: 3,
+      description: 'testtest',
+      size: 'nibble',
+      accessibility: 5,
+      categories: ['testing']
+    }
+
     it('accepts a POST request', (done) => {
       chai
         .request(server)
         .post('/activities')
+        .send(activity)
         .end((err, response) => {
-          response.should.have.status(200);
-          response.body.should.be.a('array');
-          response.body.length.should.be.eql(0);
+          response.should.have.status(201);
+          response.body.name.should.be.eql('test');
+          response.body.cost.should.be.eql(3);
+          response.body.accessibility.should.be.eql(5);
+          response.body.size.should.be.eql('nibble');
+          response.body.categories.includes('testing').should.be.eql(true);
           done();
         });
     });
