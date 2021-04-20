@@ -11,10 +11,10 @@ app.get('/activities', async (request, response) => {
     .aggregate([{ $match: { size: 'nibble' } }])
     .sample(sampleNumber);
   const appetisers = await activityModel
-    .aggregate([{ $match: { size: 'nibble' } }])
+    .aggregate([{ $match: { size: 'appetiser' } }])
     .sample(sampleNumber);
   const mains = await activityModel
-    .aggregate([{ $match: { size: 'appetiser' } }])
+    .aggregate([{ $match: { size: 'main' } }])
     .sample(sampleNumber);
   const desserts = await activityModel
     .aggregate([{ $match: { size: 'dessert' } }])
