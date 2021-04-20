@@ -3,10 +3,8 @@ const activityModel = require('../models/activity');
 const app = express();
 
 app.get('/activities', async (request, response) => {
-  let sampleNumber = 999;
-  if (request.query.limit) {
-    sampleNumber = parseInt(request.query.limit);
-  }
+  const sampleNumber = parseInt(request.query.limit) || 99;
+
   const nibbles = await activityModel
     .aggregate([{ $match: { size: 'nibble' } }])
     .sample(sampleNumber);
