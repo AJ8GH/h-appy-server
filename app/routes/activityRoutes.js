@@ -62,6 +62,9 @@ app.get('/search', async (request, response) => {
   if (request.query.accessibility) {
     request.query.accessibility = { $gte: request.query.accessibility };
   }
+  if (request.query.categories == 'all') {
+    delete request.query.categories;
+  }
 
   const results = await activityModel.find(request.query);
   try {
