@@ -12,7 +12,6 @@ const SIZES = [
 app.get('/activities', async (request, response) => {
   const sampleNumber = parseInt(request.query.limit) || 99;
 
-
   const nibbles = await activityModel
     .aggregate([{ $match: { size: 'nibble' } }])
     .sample(sampleNumber);
