@@ -13,6 +13,15 @@ const should = chai.should();
 chai.use(chaiHttp);
 //Our parent block
 describe('Activities', () => {
+  const activity = {
+    name: 'test',
+    cost: 3,
+    description: 'testtest',
+    size: 'nibble',
+    accessibility: 5,
+    categories: ['testing']
+  }
+
   beforeEach((done) => {
     //Before each test we empty the database
     Activity.remove({}, (err) => {
@@ -28,7 +37,6 @@ describe('Activities', () => {
         .get('/activities')
         .end((err, response) => {
           response.should.have.status(200);
-          response.body.should.be.a('object');
           response.body.nibbles.length.should.be.eql(0);
           response.body.appetisers.length.should.be.eql(0);
           response.body.mains.length.should.be.eql(0);
@@ -39,15 +47,6 @@ describe('Activities', () => {
   });
 
   describe('/POST activity', () => {
-    const activity = {
-      name: 'test',
-      cost: 3,
-      description: 'testtest',
-      size: 'nibble',
-      accessibility: 5,
-      categories: ['testing']
-    }
-
     it('accepts a POST request', (done) => {
       chai
         .request(server)
@@ -60,6 +59,29 @@ describe('Activities', () => {
           response.body.accessibility.should.be.eql(5);
           response.body.size.should.be.eql('nibble');
           response.body.categories.includes('testing').should.be.eql(true);
+          done();
+        });
+    });
+  });
+
+  describe('/GET categories', () => {
+    beforeEach((done) => {
+      chai
+        .request(server)
+        .post('/activities')
+        .send(activity)
+        .end((err, response) => {
+        done();
+      });
+    })
+    it('should GET all the categories', (done) => {
+      chai
+        .request(server)
+        .get('/categories')
+        .end((err, response) => {
+          response.should.have.status(200);
+          response.body.includes('testing').should.be.eql(true);
+          response.body.length.should.not.be.eql(0);
           done();
         });
     });

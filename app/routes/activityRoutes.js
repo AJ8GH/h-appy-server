@@ -2,21 +2,33 @@ const express = require('express');
 const activityModel = require('../models/activity');
 const app = express();
 
+const SIZES = [
+  { size: 'nibble' },
+  { size: 'appetiser' },
+  { size: 'main' },
+  { size: 'dessert' }
+]
+
 app.get('/activities', async (request, response) => {
   const sampleNumber = parseInt(request.query.limit) || 99;
+
 
   const nibbles = await activityModel
     .aggregate([{ $match: { size: 'nibble' } }])
     .sample(sampleNumber);
+
   const appetisers = await activityModel
     .aggregate([{ $match: { size: 'appetiser' } }])
     .sample(sampleNumber);
+
   const mains = await activityModel
     .aggregate([{ $match: { size: 'main' } }])
     .sample(sampleNumber);
+
   const desserts = await activityModel
     .aggregate([{ $match: { size: 'dessert' } }])
     .sample(sampleNumber);
+
   const activities = {
     nibbles: nibbles,
     appetisers: appetisers,
