@@ -2,6 +2,14 @@
 
 ## An app to remind you of fun things to do that make you happy, by HappyHaddock
 
+This is the server side repo for the app - the client side repo can be found at [https://github.com/peter-james-allen/h-appy-client](https://github.com/peter-james-allen/h-appy-client).
+
+The full README for the app is in that repo - click [here](https://github.com/peter-james-allen/h-appy-client/blob/main/README.md) to see it.
+
+This server is hosted publicly on heroku. Try [https://happy-haddocks.herokuapp.com/activities](https://happy-haddocks.herokuapp.com/activities) to see the API in action!
+
+Below is our initial planning documentation from the very beginning of the project.
+
 ---
 
 ## Planning
