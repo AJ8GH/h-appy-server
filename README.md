@@ -8,6 +8,8 @@ The full README for the app is in that repo - click [here](https://github.com/pe
 
 This server is hosted publicly on heroku. Try [https://happy-haddocks.herokuapp.com/activities](https://happy-haddocks.herokuapp.com/activities) to see the API in action!
 
+Shout out to Frank Atukunda's [article](https://medium.com/swlh/jwt-authentication-authorization-in-nodejs-express-mongodb-rest-apis-2019-ad14ec818122) on setting up user auth with MongoDB. 
+
 Below is our initial planning documentation from the very beginning of the project.
 
 ---
